@@ -1,14 +1,16 @@
 "use client";
 import Head from "next/head";
+import Image from "next/image";
 import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
 import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
-import deved from "src/asd.jpeg";
-import Image from "next/image";
-import rps from "public/rps2.png";
-import login from "public/login.png";
+import { FaGlobe } from "react-icons/fa";
 import { useState, useRef, useEffect } from "react";
+import pfp from "public/assets/asd.jpeg";
+import rps from "public/assets/rps2.png";
+import login from "public/assets/login.png";
+import skylex_delivery from "public/assets/skylex-delivery.png";
 
-const SingleItem = ({ imageSrc, title, description }) => {
+const SingleItem = ({ imageSrc, title, description, siteLink, githubLink }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const expandedRef = useRef(null);
 
@@ -53,7 +55,30 @@ const SingleItem = ({ imageSrc, title, description }) => {
         >
           <div className="p-8 rounded-3xl flex items-center overflow-auto">
             <div className="w-1/2">
-              <Image src={imageSrc} layout="responsive" />
+              <div className="mb-4">
+                <Image
+                  src={imageSrc}
+                  alt="Your Image"
+                  layout="responsive"
+                  className="w-full"
+                />
+              </div>
+              <div className="text-4xl flex justify-center gap-16 py-3 text-gray-600 dark:text-gray-400">
+                {siteLink && (
+                  <a href={siteLink} target="_blank" rel="noopener noreferrer">
+                    <FaGlobe className="hover:text-blue-500" />
+                  </a>
+                )}
+                {githubLink && (
+                  <a
+                    href={githubLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <AiFillGithub className="hover:text-github dark:hover:filter dark:hover:invert" />
+                  </a>
+                )}
+              </div>
             </div>
             <div className="w-1/2 p-4">{description}</div>
           </div>
@@ -65,41 +90,36 @@ const SingleItem = ({ imageSrc, title, description }) => {
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState(true);
-  const [isExpanded, setIsExpanded] = useState(false);
-  const handleCardClick = () => {
-    setIsExpanded(true);
-  };
-
-  const handlePanelClose = () => {
-    setIsExpanded(false);
-  };
 
   return (
     <div className={darkMode ? "dark" : ""} id="top-section">
       <Head>
-        <title>Yes</title>
-        <meta description="Website created by Bujdos Ferenc, mainly for portfolio purposes" />
+        <title>Bujdos Ferenc</title>
+        <meta
+          name="description"
+          content="Website created by Bujdos Ferenc, mainly for portfolio purposes"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className=" bg-violet-50 px-10 dark:bg-gray-900 md:px-20 lg:px-40 text-black">
-        <section className=" min-h-screen">
+        <section className="min-h-screen">
           <nav className="pt-2 mb-20 flex justify-between dark:text-white fixed left-10 right-10 z-10 ">
-            <h1>Home</h1>
-            <ul className="flex flex-col items-center">
+            <h1></h1>
+            <ul className="flex flex-wrap items-center">
               <li
-                className="cursor-pointer text-2xl ml-8 mb-6"
+                className="cursor-pointer text-2xl ml-8 mb-6 mt-2"
                 onClick={() => setDarkMode(!darkMode)}
               >
                 {darkMode ? <BsFillMoonStarsFill /> : <BsFillSunFill />}
               </li>
               <a
-                className="bg-gradient-to-r from-cyan-500 text- to-teal-500 text-white pl-20 pr-12 py-2 mb-3 rounded-md"
+                className="bg-gradient-to-r from-cyan-500 text- to-teal-500 text-white px-4 py-2  mb-3 rounded-md ml-4"
                 href="#top-section"
               >
                 Top
               </a>
               <a
-                className="bg-gradient-to-r from-cyan-500 text- to-teal-500 text-white pl-8 pr-6 py-2 mb-3 rounded-md ml-4"
+                className="bg-gradient-to-r from-cyan-500 text- to-teal-500 text-white px-4 py-2  mb-3 rounded-md ml-4"
                 href="#about-section"
               >
                 About
@@ -110,12 +130,6 @@ export default function Home() {
               >
                 Portfolio
               </a>
-              <a
-                className="bg-gradient-to-r from-cyan-500 text- to-teal-500 text-white px-4 py-2 mb-3 rounded-md ml-4"
-                href="#"
-              >
-                Contact
-              </a>
             </ul>
           </nav>
 
@@ -124,7 +138,7 @@ export default function Home() {
               Bujdos Ferenc
             </h2>
             <div className="mx-auto bg-gradient-to-b from-teal-500 rounded-full w-80 h-80 relative overflow-hidden mt-5 mb-5 md:h-96 md:w-96">
-              <Image src={deved} layout="fill" objectFit="cover" />
+              <Image src={pfp} layout="fill" objectFit="cover" />
             </div>
             <h3 className="text-2xl py-2 dark:text-white md:text-3xl">
               Dev whatever
@@ -145,66 +159,69 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <AiFillLinkedin
-                  className="hover:text-linkedin"
-                  href="https://example.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                />
+                <AiFillLinkedin className="hover:text-linkedin" />
               </a>
             </div>
           </div>
         </section>
+
+        <section className="flex flex-col items-center">
+          <a
+            href="https://github.com/username/repository/raw/branch/filename.ext"
+            download
+          >
+            <button className="bg-gradient-to-r from-cyan-500 text- to-teal-500 text-white px-8 py-4  mb-3 rounded-md ml-7"
+                >
+              Önéletrajzom letöltése
+            </button>
+          </a>
+        </section>
+
         <section id="about-section">
           <div>
             <h3 className="text-3xl py-1 pt-20 dark:text-white ">
-              Services I offer
+              Programozási nyelvek melyekkel tanulmányaim ideje alatt szerencsém
+              volt ismerkednem:
             </h3>
-            <p className="text-md py-2 leading-8 text-gray-800 dark:text-gray-200">
-              Since the beginning of my journey as a freelance designer and
-              developer, I've done remote work for
-              <span className="text-teal-500"> agencies </span>
-              consulted for <span className="text-teal-500">startups </span>
-              and collaborated with talanted people to create digital products
-              for both business and consumer use.
-            </p>
-            <p className="text-md py-2 leading-8 text-gray-800 dark:text-gray-200">
-              I offer from a wide range of services, including brand design,
-              programming and teaching.
-            </p>
+            <ul className="text-md py-2 list-disc ml-4 pl-4  text-gray-800 dark:text-gray-200">
+              <li>C</li>
+              <li>C#</li>
+              <li>Java/Kotlin (mind desktop mind android környezetben)</li>
+              <li>Python</li>
+              <li>Webes nyelvek:</li>
+              <ul className="list-inside list-disc">
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>PHP</li>
+                <li>Tailwind</li>
+              </ul>
+            </ul>
+            <h3 className="text-2xl py-1 pt-10 dark:text-white ">Egyebek:</h3>
+            <ul className="text-md py-2 list-disc ml-4 pl-4  text-gray-800 dark:text-gray-200">
+              <li>OpenGL</li>
+              <li>MySQL</li>
+              <li className="font-bold">Linux ismeret</li>
+              <li className="font-bold">AWS / Cloudformation</li>
+              <li>Kis szinten Assembly</li>
+              <li>Illetve Verilog</li>
+            </ul>
+            <p className="text-md py-2 leading-8 text-gray-800 dark:text-gray-200"></p>
           </div>
         </section>
+
         <section className="py-10" id="portfolio-section">
-          <div>
-            <h3 className="text-3xl py-1 dark:text-white ">Portofolio</h3>
-            <p className="text-md py-2 leading-8 text-gray-800 dark:text-gray-200">
-              Since the beginning of my journey as a freelance designer and
-              developer, I've done remote work for
-              <span className="text-teal-500"> agencies </span>
-              consulted for <span className="text-teal-500">startups </span>
-              and collaborated with talanted people to create digital products
-              for both business and consumer use.
-            </p>
-            <p className="text-md py-2 leading-8 text-gray-800 dark:text-gray-200">
-              I offer from a wide range of services, including brand design,
-              programming and teaching.
-            </p>
-          </div>
+          <h3 className="text-3xl py-1 dark:text-white ">Portofolio</h3>
           <div className="flex flex-col gap-10 py-10 lg:flex-row lg:flex-wrap rounded-3xl">
             <SingleItem
               imageSrc={rps}
               title="RPS Website"
+              githubLink="https://github.com/Bujdosf/Rock-Paper-Scissors_Website"
+              siteLink="https://bujdosf.github.io/Rock-Paper-Scissors_Website/"
               description={
                 <>
                   <p class="mb-4 text-lg text-center">
-                    Webes egyetemi órára{" "}
-                    <a
-                      href="https://bujdosf.github.io/Rock-Paper-Scissors_Website/"
-                      className="underline italic"
-                    >
-                      első project feladat
-                    </a>
-                    .
+                    Webes egyetemi órára első project feladat.
                   </p>
                   <div class="flex items-center justify-center">
                     <div>
@@ -219,20 +236,15 @@ export default function Home() {
                 </>
               }
             />
+
             <SingleItem
               imageSrc={login}
               title="Login Website"
+              siteLink="http://bujdosf.42web.io/index.php"
               description={
                 <>
                   <p class="mb-4 text-lg text-center">
-                    Webes egyetemi órára{" "}
-                    <a
-                      href="http://bujdosf.42web.io/index.php"
-                      className="underline italic"
-                    >
-                      második project feladat
-                    </a>
-                    .
+                    Webes egyetemi órára második project feladat.
                   </p>
                   <p class="mb-4">
                     Kicsit komplikáltabb feladat mint egy RPS oldal. Feladat
@@ -253,7 +265,6 @@ export default function Home() {
                     kedvenc színéről, mint pl a háttér változtatása a megadott
                     színre.
                   </p>
-
                   <p>Amit tanultam ez alatt:</p>
                   <ul className="list-disc ml-4 pl-4">
                     <li>PHP</li>
@@ -262,8 +273,36 @@ export default function Home() {
                 </>
               }
             />
+
+            <SingleItem
+              imageSrc={skylex_delivery}
+              title="H2 DB Java App"
+              githubLink="https://github.com/kiss-mate/sfm-project/tree/endgame/"
+              description={
+                <>
+                  <p class="mb-4 text-lg text-center">
+                    Egyetemi SFM órára csoport projekt.
+                  </p>
+                  <div class="flex items-center justify-center">
+                    <div>
+                      <p>Amit tanultam ez alatt:</p>
+                      <ul class="list-disc ml-4 pl-4">
+                        <p>
+                          Főleg csak softver-paradigmok. Egyikőnk már munka
+                          alatt csinálta velünk ezt, szóval tudott tanítani
+                          minket hogy hogy megy vállalti környezetekben, még
+                          akkor is ha egy kicsit sok volt egyszerre
+                        </p>
+                        <p>Illetve egy kis adatbázis bevezető</p>
+                      </ul>
+                    </div>
+                  </div>
+                </>
+              }
+            />
           </div>
         </section>
+
       </main>
     </div>
   );
