@@ -5,7 +5,7 @@ import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
 import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 import { FaGlobe } from "react-icons/fa";
 import { useState, useRef, useEffect } from "react";
-import pfp from "public/assets/pfp.jpeg";
+import pfp from "public/assets/pfp.jpg";
 import rps from "public/assets/rps2.png";
 import login from "public/assets/login.png";
 import skylex_delivery from "public/assets/skylex-delivery.png";
@@ -91,6 +91,16 @@ const SingleItem = ({ imageSrc, title, description, siteLink, githubLink }) => {
 export default function Home() {
   const [darkMode, setDarkMode] = useState(true);
 
+  function handleDownload() {
+    const fileUrl = "/assets/CV.docx";
+    const a = document.createElement("a");
+    a.href = fileUrl;
+    a.download = "bujdos_ferenc_cv.docx";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
   return (
     <div className={darkMode ? "dark" : ""} id="top-section">
       <Head>
@@ -122,7 +132,7 @@ export default function Home() {
                 className="bg-gradient-to-r from-cyan-500 text- to-teal-500 text-white px-4 py-2  mb-3 rounded-md ml-4"
                 href="#about-section"
               >
-                About
+                About-Me
               </a>
               <a
                 className="bg-gradient-to-r from-cyan-500 text- to-teal-500 text-white px-4 py-2  mb-3 rounded-md ml-4"
@@ -137,15 +147,9 @@ export default function Home() {
             <h2 className="text-5xl py-2 text-teal-600 font-medium dark:text-teal-400 md:text-6xl">
               Bujdos Ferenc
             </h2>
-            <div className="mx-auto bg-gradient-to-b from-teal-500 rounded-full w-80 h-80 relative overflow-hidden mt-5 mb-5 md:h-96 md:w-96">
+            <div className="mx-auto bg-gradient-to-b from-teal-500 rounded-full w-80 h-80 relative overflow-hidden mt-10 mb-20 md:h-96 md:w-96">
               <Image src={pfp} layout="fill" objectFit="cover" />
             </div>
-            <h3 className="text-2xl py-2 dark:text-white md:text-3xl">
-              Dev whatever
-            </h3>
-            <p className="text-md py-5 leading-8 text-gray-800 dark:text-gray-200 max-w-xl mx-auto md:text-xl">
-              Whatever
-            </p>
             <div className="text-5xl flex justify-center gap-16 py-3 text-gray-600 dark:text-gray-400">
               <a
                 href="https://github.com/Bujdosf"
@@ -162,19 +166,14 @@ export default function Home() {
                 <AiFillLinkedin className="hover:text-linkedin" />
               </a>
             </div>
-          </div>
-        </section>
-
-        <section className="flex flex-col items-center">
-          <a
-            href="https://github.com/Bujdosf/portfolio_site/tree/main/public/assets/CV.docx"
-            download
+            <button
+            id="CVButton"
+            className="bg-gradient-to-r from-cyan-500 mt-20 to-teal-500 text-white px-8 py-4  mb-3 rounded-md ml-7"
+            onClick={handleDownload}
           >
-            <button className="bg-gradient-to-r from-cyan-500 text- to-teal-500 text-white px-8 py-4  mb-3 rounded-md ml-7"
-                >
-              Önéletrajzom letöltése
-            </button>
-          </a>
+            Önéletrajzom letöltése
+          </button>
+          </div>
         </section>
 
         <section id="about-section">
@@ -303,7 +302,6 @@ export default function Home() {
             />
           </div>
         </section>
-
       </main>
     </div>
   );
