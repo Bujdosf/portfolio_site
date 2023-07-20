@@ -5,7 +5,7 @@ import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
 import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 import { FaGlobe } from "react-icons/fa";
 import { useState, useRef, useEffect } from "react";
-import pfp from "public/assets/asd.jpeg";
+import pfp from "public/assets/pfp.jpeg";
 import rps from "public/assets/rps2.png";
 import login from "public/assets/login.png";
 import skylex_delivery from "public/assets/skylex-delivery.png";
@@ -167,7 +167,7 @@ export default function Home() {
 
         <section className="flex flex-col items-center">
           <a
-            href="https://github.com/username/repository/raw/branch/filename.ext"
+            href="https://github.com/Bujdosf/portfolio_site/tree/main/public/assets/CV.docx"
             download
           >
             <button className="bg-gradient-to-r from-cyan-500 text- to-teal-500 text-white px-8 py-4  mb-3 rounded-md ml-7"
@@ -240,6 +240,7 @@ export default function Home() {
             <SingleItem
               imageSrc={login}
               title="Login Website"
+              githubLink="https://github.com/Bujdosf/PHP_LoginWebsite"
               siteLink="http://bujdosf.42web.io/index.php"
               description={
                 <>
